@@ -7,7 +7,7 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Terrain_SandCliff_1
-  m_DiffuseTexture: {fileID: 2800000, guid: d4909e4ae2ba02e44a517a12656af19f, type: 3}
+  m_DiffuseTexture: {fileID: 2800000, guid: 6a14e406b18fb48aaa310a326876f97a, type: 3}
   m_NormalMapTexture: {fileID: 2800000, guid: 638e903fc2e763c4ca4263074de84424, type: 3}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 10, y: 10}

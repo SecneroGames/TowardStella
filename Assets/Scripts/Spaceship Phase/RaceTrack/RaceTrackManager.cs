@@ -94,7 +94,7 @@ public class RaceTrackManager : MonoBehaviour
 
     public void OnExit()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainMenu");
     }
     //check if a ship has reached goal
     public bool GoalReached(Transform shipTransform)
