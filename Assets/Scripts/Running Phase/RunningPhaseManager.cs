@@ -123,7 +123,7 @@ public class RunningPhaseManager : MonoBehaviour
         TimerText.text = $"{Mathf.CeilToInt(GameTimer).ToString()}s";
         CreditsText.text = $"{CreditsPickupCount} Credits";
     }
-    public void EndGame()
+    public void EndGame(string sceneName)
     {
         Debug.Log("End");
         if (CreditsPickupCount >= 0)
@@ -138,7 +138,7 @@ public class RunningPhaseManager : MonoBehaviour
             shipStats.Credits += CreditsPickupCount;
         }
         OnTimerEnd?.Invoke();
-        SceneLoader.instance.LoadScene("TransitionScene");
+        SceneLoader.instance.LoadScene(sceneName);
         gameIsRunning = false;
 
     }
