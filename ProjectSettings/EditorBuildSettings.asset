@@ -26,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Chapter2/Race2.unity
     guid: cbc463eb3311ad74b8ff33b93bb08c7f
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter3/Running3.unity
+    guid: 3ccf2288fbbf7144fbede963a1517fed
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter3/Transition3.unity
+    guid: 06fd8c5fae7c44b48a68df861534c4b0
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter3/Race3.unity
+    guid: bc8870573682f95459b33924c614f36d
   m_configObjects: {}

@@ -153,6 +153,11 @@ public class PlayerMovementController : MonoBehaviour
             ChangeSpeed(movementSpeed * .5f);
             movementSpeed = Mathf.Clamp(movementSpeed, 2, defaultSpeed);
         }
+        if(other.gameObject.tag == "Boundary")
+        {
+            Debug.Log("DED");
+            RunningPhaseManager.instance.GameOver();
+        }
     }
 
     private void OnTriggerExit(Collider other)

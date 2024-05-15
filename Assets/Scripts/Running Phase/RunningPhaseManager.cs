@@ -78,8 +78,7 @@ public class RunningPhaseManager : MonoBehaviour
 
         if (GameTimer <= 0 || health <= 0)
         {
-            Time.timeScale = 0f;
-            GameOverPanel.SetActive(true);
+            GameOver();
             
             // GameTimer = 0;
             // TimerText.text = $"{Mathf.CeilToInt(GameTimer).ToString()}s";
@@ -93,6 +92,12 @@ public class RunningPhaseManager : MonoBehaviour
         }
 
         healthImage.fillAmount = health/maxHealth;
+    }
+
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        GameOverPanel.SetActive(true);
     }
 
     public void OnPickup(PickupType type)
