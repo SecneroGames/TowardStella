@@ -7,7 +7,7 @@ public class SpaceShipController : MonoBehaviour
     public PlayerDataSO PlayerShipStatSO;
     public ShipStats PlayerShipStats;
 
-    public float fireRate = 2;
+    public float fireRate = 1;
 
     [Header("Ship Turn Visuals Setup")]     
     public float rollSpeed = 2.0f;  // Speed of roll rotation
@@ -28,11 +28,12 @@ public class SpaceShipController : MonoBehaviour
     private float steeringValue =0;
 
     private bool isFlying = false;
+    private bool canShoot = false;
 
     [Header("blaster")]
     public GameObject bulletPrefab;
     public Transform spawnPoint;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 20f;
 
 
     //move this to a different thing
@@ -61,9 +62,20 @@ public class SpaceShipController : MonoBehaviour
             blasterTimer -= Time.deltaTime;
             if (blasterTimer <= 0)
             {
-                Shoot();
-                blasterTimer = fireRate;
+                canShoot = true;
+                
             }
+            else
+            {
+                canShoot = false;
+            }
+        }
+
+        if(canShoot && Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+            blasterTimer = fireRate;
+            canShoot = false;
         }
 
         //reset speed boost / speed debuff;
