@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
+using Unity.Netcode;
 
 
 [RequireComponent(typeof(CharacterController))]
 
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovementController : NetworkBehaviour
 {
 
     public GameObject PlayerModelParent; // Reference to the player model
@@ -37,6 +39,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void Start()
     {
+        if(!IsOwner) return;
         characterController = GetComponent<CharacterController>(); // Get the CharacterController component
         lookTransform.position = transform.position; // Set initial look position to player's position
         defaultSpeed = movementSpeed; // Store default movement speed
@@ -46,8 +49,9 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
+        if (!IsOwner) return;
         // Get input from Horizontal and Vertical axes
-        if(JoystickController.instance.InputDirection!=Vector2.zero)
+        if (JoystickController.instance.InputDirection!=Vector2.zero)
         {
             InputVector = JoystickController.instance.InputDirection;
         }

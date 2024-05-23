@@ -14,7 +14,7 @@ public class RunningPhaseManager : MonoBehaviour
     public Transform Player;
     [Space]
     float GameTimer;
-    float TimeLimit = 30f;
+    float TimeLimit = 999f;
 
     [SerializeField]
     TextMeshProUGUI TimerText;
@@ -55,7 +55,7 @@ public class RunningPhaseManager : MonoBehaviour
         Time.timeScale = 1f;
         AudioManager.instance.PlayBGM("RunningBGM");
         CreditsPickupCount = 0;
-        playerMovementController.enabled = true;
+        //playerMovementController.enabled = true;
         CreditsText.text = $"{CreditsPickupCount} Credits";
     }
 
