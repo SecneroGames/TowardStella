@@ -117,6 +117,24 @@ public class RunningPhaseManager : MonoBehaviour
 
     }
 
+    public string PickupValue(PickupType type)
+    {
+        string val = string.Empty; // Initialize with a default value
+        switch (type)
+        {
+            case PickupType.CREDIT:
+                val = "+500 credits";
+                break;
+            case PickupType.TIME:
+                val = "+5s timer";
+                break;
+            default:
+                val = "Unknown"; // Optional: Handle unexpected cases
+                break;
+        }
+        return val;
+    }
+
     public void OnEnemyHit()
     {
         AudioManager.instance.PlaySFX("DamageSFX");

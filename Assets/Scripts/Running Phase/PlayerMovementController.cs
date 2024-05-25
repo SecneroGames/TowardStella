@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 [RequireComponent(typeof(CharacterController))]
 
 public class PlayerMovementController : MonoBehaviour
 {
-
+    public static PlayerMovementController instance;
     public GameObject PlayerModelParent; // Reference to the player model
     [SerializeField] private Animator modelAnimator;
 
@@ -35,11 +35,21 @@ public class PlayerMovementController : MonoBehaviour
     public Animator _Animator { get => modelAnimator; set => modelAnimator = value; }
     public bool CanMove { get => canMove; set => canMove = value; }
 
+    //my code
+    [SerializeField] private Canvas hpPopup;
+    private Camera cam;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>(); // Get the CharacterController component
         lookTransform.position = transform.position; // Set initial look position to player's position
         defaultSpeed = movementSpeed; // Store default movement speed
+        cam = Camera.main;
     }
 
     Vector2 InputVector = Vector2.zero;
@@ -164,5 +174,21 @@ public class PlayerMovementController : MonoBehaviour
     {
         if(movementSpeed<defaultSpeed)
          ResetSpeed();
+    }
+
+    public void spawnPopUP(string info)
+    {
+        Vector3 offset = new Vector3(1f, 2f, 0.1f);
+        Canvas hpPop = Instantiate(hpPopup, transform.position + offset, Quaternion.identity);
+        TMP_Text hpPopText = hpPop.GetComponentInChildren<TMP_Text>();
+        hpPopText.text = info;
+
+        hpPop.transform.LookAt(hpPop.transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
+
+        Vector3 sideOffset = new Vector3(.5f, 0f, 0f);
+        Rigidbody hpPopRb = hpPop.gameObject.GetComponent<Rigidbody>();
+        hpPopRb.AddForce((transform.up + sideOffset) * 150f);
+        
+        Destroy(hpPop, 0.5f);
     }
 }

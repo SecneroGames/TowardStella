@@ -4146,7 +4146,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 10edfdce2d6ef704aae16645d7d01eb9, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d8538c0650814d545a6df497d26c55c7, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &613178904
 GameObject:
@@ -8510,6 +8510,7 @@ MonoBehaviour:
   targetHolder: {fileID: 1710382429}
   lookTransform: {fileID: 653874782}
   lookatSpeed: 1.76
+  hpPopup: {fileID: 4705521637936644744, guid: 1280c7809adb35f43a285f4d2c7ebd1f, type: 3}
 --- !u!143 &1334744416
 CharacterController:
   m_ObjectHideFlags: 0

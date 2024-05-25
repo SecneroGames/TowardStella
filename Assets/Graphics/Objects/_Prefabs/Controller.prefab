@@ -261,7 +261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 3392300581840593222}
-  bulletspeed: 500
+  bulletspeed: 1000
 --- !u!54 &4181595073537207046
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -284,10 +284,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 116
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!1 &1058845028167542623
 GameObject:
@@ -5943,7 +5943,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 85
+  m_Speed: 80
   m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -6057,19 +6057,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerShipStatSO: {fileID: 11400000, guid: 036ed261f54b9e747926a727be87676e, type: 2}
   PlayerShipStats:
-    maxSpeed: 80
+    maxSpeed: 85
     acceleration: 20
     steering: 20
     boostDuration: 1
     collisionRecovery: 1
     hasBlaster: 1
-  fireRate: 3
+  fireRate: 1
   rollSpeed: 2
   rollTurnSpeed: 3
   maxRollAngle: 25
   bulletPrefab: {fileID: 410880398413194464}
   spawnPoint: {fileID: 8405491155239132136}
-  bulletSpeed: 150
+  bulletSpeed: 200
   ctrl: {fileID: 3603008912810233525}
 --- !u!54 &2909804832394842053
 Rigidbody:

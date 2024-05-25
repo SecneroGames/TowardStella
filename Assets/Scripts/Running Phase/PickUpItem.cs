@@ -51,6 +51,8 @@ public class PickUpItem : MonoBehaviour
         PickedUp = true;
         PickupObject.SetActive(false);
         collectedCounter++;
+
+        PlayerMovementController.instance.spawnPopUP(RunningPhaseManager.instance.PickupValue(pickupType));
        
         if(collectedCounter<respawnLimit)
             StartCoroutine(Respawn());

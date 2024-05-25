@@ -71,13 +71,6 @@ public class SpaceShipController : MonoBehaviour
             }
         }
 
-        if(canShoot && Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot();
-            blasterTimer = fireRate;
-            canShoot = false;
-        }
-
         //reset speed boost / speed debuff;
         if (buffTimer>0)
         {            
@@ -183,7 +176,15 @@ public class SpaceShipController : MonoBehaviour
       
     }
 
-
+    public void ButtonShoot()
+    {
+        if(canShoot)
+        {
+            Shoot();
+            blasterTimer = fireRate;
+            canShoot = false;
+        }
+    }
 
     //On sceen controls
     public void Steer(float val)

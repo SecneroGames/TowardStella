@@ -7648,6 +7648,7 @@ MonoBehaviour:
   targetHolder: {fileID: 1710382429}
   lookTransform: {fileID: 653874782}
   lookatSpeed: 1.76
+  hpPopup: {fileID: 4705521637936644744, guid: 1280c7809adb35f43a285f4d2c7ebd1f, type: 3}
 --- !u!143 &1334744416
 CharacterController:
   m_ObjectHideFlags: 0
