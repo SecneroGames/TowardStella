@@ -121,11 +121,11 @@ public class PlayerMovementController : NetworkBehaviour
         relativeVector.x = InputVector.x;
         relativeVector.z = InputVector.y;
         lookTransform.Translate(relativeVector * Time.unscaledDeltaTime * lookatSpeed);
-        relativePos.x = lookTransform.position.x - PlayerModelParent.transform.position.x;
-        relativePos.z = lookTransform.position.z - PlayerModelParent.transform.position.z;
+        relativePos.x = lookTransform.position.x - transform.position.x;
+        relativePos.z = lookTransform.position.z - transform.position.z;
 
         Quaternion rotation = Quaternion.LookRotation(relativePos);
-        PlayerModelParent.transform.rotation = rotation;
+        transform.rotation = rotation;
     }
 
     // function to apply gravity to the player
