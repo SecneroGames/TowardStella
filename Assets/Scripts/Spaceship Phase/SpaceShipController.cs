@@ -12,7 +12,8 @@ public class SpaceShipController : MonoBehaviour
     [Header("Ship Turn Visuals Setup")]     
     public float rollSpeed = 2.0f;  // Speed of roll rotation
     public float rollTurnSpeed = 2.0f; // Speed at which the ship turns when rolling
-    public float maxRollAngle = 45f; // Maximum roll angle in degrees
+    public float maxRollAngle = 15f; // Maximum roll angle in degrees
+    public float yawSpeed = 6.0f; // Speed of yaw rotation
 
     private Rigidbody rb; // Reference to the Rigidbody component
     private float targetRollAngle = 0f; // Target roll angle
@@ -25,7 +26,7 @@ public class SpaceShipController : MonoBehaviour
     private float blasterTimer = 0;
 
     private float rollInput;
-    private float steeringValue =0;
+    private float steeringValue = 0;
 
     private bool isFlying = false;
     private bool canShoot = false;
@@ -34,7 +35,6 @@ public class SpaceShipController : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform spawnPoint;
     public float bulletSpeed = 20f;
-
 
     //move this to a different thing
     public SpaceLightsController ctrl;
@@ -63,7 +63,6 @@ public class SpaceShipController : MonoBehaviour
             if (blasterTimer <= 0)
             {
                 canShoot = true;
-                
             }
             else
             {
@@ -72,10 +71,10 @@ public class SpaceShipController : MonoBehaviour
         }
 
         //reset speed boost / speed debuff;
-        if (buffTimer>0)
+        if (buffTimer > 0)
         {            
             buffTimer -= Time.deltaTime;
-            if(buffTimer<=0)
+            if (buffTimer <= 0)
             {
                 currentAcceleration = tempAcceleration;
                 buffTimer = 0;
@@ -86,22 +85,27 @@ public class SpaceShipController : MonoBehaviour
 
         if (!isFlying) return;
 
-             
         if (steeringValue == 0)
         {
             rollInput = Input.GetAxis("Horizontal");
-        }else
+        }
+        else
         {
             rollInput = steeringValue;
         }
     }
 
-    
     private void FixedUpdate()
-    {        
-
+    {
         // Calculate the target roll angle based on input, inverse the roll
-        targetRollAngle = Mathf.Lerp(targetRollAngle, (rollInput * -1) * maxRollAngle, Time.fixedDeltaTime * rollTurnSpeed);
+        if (rollInput != 0)
+        {
+            targetRollAngle = (rollInput * -1) * maxRollAngle;
+        }
+        else
+        {
+            targetRollAngle = 0f;
+        }
 
         // Apply roll rotation towards the target angle
         currentRollAngle = Mathf.Lerp(currentRollAngle, targetRollAngle, Time.fixedDeltaTime * rollSpeed);
@@ -109,23 +113,45 @@ public class SpaceShipController : MonoBehaviour
         // Clamp the roll angle to the maximum roll angle
         currentRollAngle = Mathf.Clamp(currentRollAngle, -maxRollAngle, maxRollAngle);
 
+        // Calculate the roll rotation
         Quaternion rollRotationDelta = Quaternion.Euler(0f, 0f, currentRollAngle);
-        rb.MoveRotation(Quaternion.Lerp(rb.rotation, rollRotationDelta, Time.fixedDeltaTime * rollTurnSpeed));
 
-        // Calculate side to side movement based on roll angle
-        Vector3 lateralMovement = Vector3.right * rollInput * PlayerShipStats.steering;    
-        
+        // Calculate yaw rotation based on input
+        float yawInput = rollInput;
+        Quaternion yawRotationDelta = Quaternion.Euler(0f, yawInput * yawSpeed, 0f);
+
+        // Apply the yaw rotation separately
+        rb.MoveRotation(Quaternion.Lerp(rb.rotation, rb.rotation * yawRotationDelta, Time.fixedDeltaTime * yawSpeed));
+
+        // Apply the roll rotation relative to the current rotation
+        Quaternion newRotation = rb.rotation * rollRotationDelta;
+
+        // Modify the new rotation to keep rotation around the x-axis at 0
+        newRotation = Quaternion.Euler(0f, newRotation.eulerAngles.y, newRotation.eulerAngles.z);
+
+        rb.MoveRotation(Quaternion.Lerp(rb.rotation, newRotation, Time.fixedDeltaTime * rollSpeed));
+
+        // Calculate side-to-side movement based on roll angle
+        Vector3 lateralMovement = Vector3.right * rollInput * PlayerShipStats.steering;
+
         rb.AddRelativeForce(lateralMovement, ForceMode.Force);
 
         if (isFlying)
         {
             // Apply constant forward force
             rb.AddRelativeForce(Vector3.forward * currentAcceleration, ForceMode.Force);
-        }  
+        }
 
         // Clamp the velocity to the maximum speed
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, currentMaxSpeed);
         ctrl.AdjustSpeed(rb.velocity.z * .2f);
+
+        // Return z rotation (roll) to zero when no input
+        if (rollInput == 0)
+        {
+            Quaternion targetRotation = Quaternion.Euler(rb.rotation.eulerAngles.x, rb.rotation.eulerAngles.y, 0f);
+            rb.MoveRotation(Quaternion.Lerp(rb.rotation, targetRotation, Time.fixedDeltaTime * rollSpeed));
+        }
     }
 
     private void OnTriggerEnter(Collider otherobject)
@@ -158,7 +184,7 @@ public class SpaceShipController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Bullet"))
+        if (collision.gameObject.CompareTag("Bullet"))
         {
             return;
         }
@@ -172,13 +198,11 @@ public class SpaceShipController : MonoBehaviour
     {
         GameObject projectile = Instantiate(bulletPrefab, spawnPoint.position, spawnPoint.rotation);
         projectile.SetActive(true);
-       
-      
     }
 
     public void ButtonShoot()
     {
-        if(canShoot)
+        if (canShoot)
         {
             Shoot();
             blasterTimer = fireRate;
@@ -186,7 +210,7 @@ public class SpaceShipController : MonoBehaviour
         }
     }
 
-    //On sceen controls
+    //On screen controls
     public void Steer(float val)
     {
         steeringValue = val;

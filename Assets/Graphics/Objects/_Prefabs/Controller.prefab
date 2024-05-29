@@ -6066,7 +6066,8 @@ MonoBehaviour:
   fireRate: 1
   rollSpeed: 2
   rollTurnSpeed: 3
-  maxRollAngle: 25
+  maxRollAngle: 15
+  yawSpeed: 8
   bulletPrefab: {fileID: 410880398413194464}
   spawnPoint: {fileID: 8405491155239132136}
   bulletSpeed: 200
