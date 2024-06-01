@@ -8,6 +8,8 @@ TagManager:
   - Speedboost
   - Bullet
   - Boundary
+  - TrackingObject
+  - Goal
   layers:
   - Default
   - TransparentFX

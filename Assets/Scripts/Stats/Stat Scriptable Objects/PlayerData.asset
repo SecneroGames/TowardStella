@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: 
   ChapterCompleted: 1
-  Credits: 1027.9388
-  maxSpeed: 100
-  acceleration: 100
-  steering: 14.8
-  boostDuration: 1.2499998
-  collisionRecovery: 1.2350003
+  Credits: 999
+  maxSpeed: 150
+  acceleration: 20
+  steering: 10
+  boostDuration: 1
+  collisionRecovery: 1.5
   hasBlaster: 1
   blasterLevel: 0
   maxShipSpeed: 150

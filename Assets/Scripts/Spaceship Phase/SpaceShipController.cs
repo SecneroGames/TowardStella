@@ -43,6 +43,7 @@ public class SpaceShipController : MonoBehaviour
 
     private void Start()
     {
+        PlayerShipStatSO.ResetToDefaultValues();// edited by me// always default the values
         PlayerShipStats.CopyFromSO(PlayerShipStatSO);
 
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component
@@ -179,6 +180,18 @@ public class SpaceShipController : MonoBehaviour
             currentMaxSpeed *= 1.5f; // 1.5 max speed boost
             buffTimer = PlayerShipStats.boostDuration;
             Debug.Log("woosh!");
+        }
+
+        if (otherobject.gameObject.CompareTag("Goal"))
+        {
+            if(RaceTrackManager.Instance.hasLaps)
+            {
+                RaceTrackManager.Instance.laps++;
+            }
+            else
+            {
+
+            }
         }
     }
 

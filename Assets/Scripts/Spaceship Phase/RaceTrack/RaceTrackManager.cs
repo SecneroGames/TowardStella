@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class RaceTrackManager : MonoBehaviour
 {
-    
+    public static RaceTrackManager Instance;
     [SerializeField] Transform StartingPosition;
     [SerializeField] Transform GoalPosition;
 
@@ -28,6 +29,17 @@ public class RaceTrackManager : MonoBehaviour
 
     //my code
     [SerializeField] private GameObject PausePanel;
+    [SerializeField] private TextMeshProUGUI lapsText;
+    [SerializeField] private TextMeshProUGUI counter;
+    public bool hasLaps;
+    public int maxLaps = 3;
+    public int laps = 0;
+    private bool gameStart = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -36,15 +48,44 @@ public class RaceTrackManager : MonoBehaviour
         EndRacePanel.SetActive(false);
         ControlPanel.SetActive(true);
         AudioManager.instance.PlayBGM("RaceBGM");
+        StartCoroutine(StartCountdown());
     }
 
     private void Update()
     {
-        if(isRaceOngoing)
+        if(gameStart)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
+
+        lapsText.text = $"Lap {laps}/{maxLaps}";
+        if(hasLaps && isRaceOngoing)
+        {
+            CheckLaps();
+        }
+        else
         {
             CheckShips();
         }
+    }
+
+    private void CheckLaps()
+    {
+        if(laps >= maxLaps)
+        {
+            isRaceOngoing = false;
+            EndRacePanel.SetActive(true);
+            ControlPanel.SetActive(false);
+            EndGameDebug();
+        }
+        else
+        {
             
+        }
     }
 
     //Update all ship positions.
@@ -62,7 +103,6 @@ public class RaceTrackManager : MonoBehaviour
                     ControlPanel.SetActive(false);
                     EndGameDebug();
 
-
                     OnGoalReached?.Invoke();
                 }
                 else
@@ -79,6 +119,7 @@ public class RaceTrackManager : MonoBehaviour
 
     void EndGameDebug()
     {
+        gameStart = false;
         if (shipsDone <= 0)
         {
             WinLoseText.text = "You Won!";
@@ -108,13 +149,13 @@ public class RaceTrackManager : MonoBehaviour
 
     public void PauseButton()
     {
-        Time.timeScale = 0;
+        gameStart = false;
         PausePanel.SetActive(true);
     }   
 
     public void ResumeButton()
     {
-        Time.timeScale = 1;
+        gameStart = true;
         PausePanel.SetActive(false);
     }   
 
@@ -128,5 +169,20 @@ public class RaceTrackManager : MonoBehaviour
     {
         SceneLoader.instance.LoadScene("MainMenu");
     }   
+
+    private IEnumerator StartCountdown()
+    {
+        int countdownTime = 3;
+        while (countdownTime > 0)
+        {
+            counter.text = countdownTime.ToString();
+            yield return new WaitForSecondsRealtime(1);
+            countdownTime--;
+        }
+        counter.text = "GO!";
+        yield return new WaitForSecondsRealtime(1);
+        counter.gameObject.SetActive(false);
+        gameStart = true;
+    }
 }
 
