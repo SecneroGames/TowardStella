@@ -21,7 +21,7 @@ public class RaceTrackManager : MonoBehaviour
 
     bool isRaceOngoing = true;
     float goalOffset = 50f;
-    int shipsDone = 0;
+    public int shipsDone = 0;
 
     [SerializeField] UnityEvent OnGoalReached = new UnityEvent();
     [SerializeField] UnityEvent OnRaceStarted = new UnityEvent();
@@ -63,14 +63,18 @@ public class RaceTrackManager : MonoBehaviour
         }
 
         lapsText.text = $"Lap {laps}/{maxLaps}";
-        if(hasLaps && isRaceOngoing)
+        if(isRaceOngoing)
         {
-            CheckLaps();
+            if(hasLaps)
+            {
+                CheckLaps();
+            }
+            else
+            {
+                CheckShips();
+            }
         }
-        else
-        {
-            CheckShips();
-        }
+        
     }
 
     private void CheckLaps()

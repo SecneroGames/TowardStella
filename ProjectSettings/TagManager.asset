@@ -10,6 +10,8 @@ TagManager:
   - Boundary
   - TrackingObject
   - Goal
+  - Bound
+  - Bound2
   layers:
   - Default
   - TransparentFX

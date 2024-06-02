@@ -41,6 +41,9 @@ public class SpaceShipController : MonoBehaviour
 
     public float BlasterTimer { get => blasterTimer; set => blasterTimer = value; }
 
+    [SerializeField] private GameObject rockBoundary;
+    [SerializeField] private GameObject rockBoundary2;
+
     private void Start()
     {
         PlayerShipStatSO.ResetToDefaultValues();// edited by me// always default the values
@@ -192,6 +195,18 @@ public class SpaceShipController : MonoBehaviour
             {
 
             }
+        }
+
+        if(otherobject.gameObject.CompareTag("Bound"))
+        {
+            rockBoundary.SetActive(false);
+            rockBoundary2.SetActive(true);
+        }
+        
+        if(otherobject.gameObject.CompareTag("Bound2"))
+        {
+            rockBoundary.SetActive(true);
+            rockBoundary2.SetActive(false);
         }
     }
 
