@@ -55,7 +55,7 @@ public class SpaceShipController : MonoBehaviour
         buffTimer = 0;
         currentMaxSpeed = PlayerShipStats.maxSpeed;
         isFlying = true;
-     
+
         if (PlayerShipStats.hasBlaster) blasterTimer = fireRate;
     }
 
