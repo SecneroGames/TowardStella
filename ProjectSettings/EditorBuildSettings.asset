@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/MainMenu.unity
     guid: 6c2b4e10aac146049a200d44668414e4
   - enabled: 1
+    path: Assets/Scenes/Game/Chapter1/cutscene1.unity
+    guid: 86e3b3e84bf4f494ca8a45f33dd646aa
+  - enabled: 1
     path: Assets/Scenes/Game/Chapter1/Running1.unity
     guid: 3248d6b30a0cf3c4f8def1aa63c647ae
   - enabled: 1
@@ -17,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Chapter1/Race1.unity
     guid: 47093b5a5437cf64ab7b3ff311c9d025
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter2/cutscene2.unity
+    guid: aafe0871b387f954193f725a87c309fa
   - enabled: 1
     path: Assets/Scenes/Game/Chapter2/Running2.unity
     guid: 3838e6cff57228e46b885eeabf660911
@@ -27,6 +33,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/Chapter2/Race2.unity
     guid: cbc463eb3311ad74b8ff33b93bb08c7f
   - enabled: 1
+    path: Assets/Scenes/Game/Chapter3/cutscene3.unity
+    guid: cf18b28b1d927db4bb9fd850e35fb747
+  - enabled: 1
     path: Assets/Scenes/Game/Chapter3/Running3.unity
     guid: 3ccf2288fbbf7144fbede963a1517fed
   - enabled: 1
@@ -35,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Chapter3/Race3.unity
     guid: bc8870573682f95459b33924c614f36d
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter4/cutscene4.unity
+    guid: e8bd9eba9ac31c544bb6c5b32138ceeb
   - enabled: 1
     path: Assets/Scenes/Game/Chapter4/Running4.unity
     guid: a4eca89607a3b66429bb96e57c86475d
