@@ -1,60 +1,57 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleBehaviour : MonoBehaviour
 {
-    public GameObject ObstacleObject;
-    public Explosion_1 OnCollisionFX;
+    public GameObject obstacleMesh;
+    public Explosion_1 explosionEffect;
+    private Collider obstacleCollider;
 
-    public float rotationSpeed = .45f; 
-    float rotationSpeedBase = 50f; 
+    public float rotationSpeed = 0.45f;
+    private float rotationSpeedBase;
 
     private void Start()
     {
         Initialize();
-
+        obstacleCollider = GetComponent<Collider>();
     }
 
     public void Initialize()
     {
-        ObstacleObject.SetActive(true);
-        OnCollisionFX.gameObject.SetActive(false);
-        OnCollisionFX.enabled = false;
+        obstacleMesh.SetActive(true);
+        explosionEffect.gameObject.SetActive(false);
+        explosionEffect.enabled = false;
         rotationSpeedBase = Random.Range(0f, 60f);
-    }
-
-    private void OnTriggerEnter(Collider otherobject)
-    {
-        if (ObstacleObject.activeInHierarchy == false) return;
-
-        Debug.Log("HIITTT");
-
-        if (otherobject.gameObject.CompareTag("Player"))
+        if (obstacleCollider != null)
         {
-            ObstacleObject.SetActive(false);
-            OnCollisionFX.gameObject.SetActive(true);
-            OnCollisionFX.enabled = true;
-        }
-
-        if (otherobject.gameObject.CompareTag("Bullet"))
-        {
-            ObstacleObject.SetActive(false);
-            OnCollisionFX.gameObject.SetActive(true);
-            OnCollisionFX.enabled = true;
+            obstacleCollider.enabled = true;
         }
     }
 
-   
-
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        //check if gameobject is active
-        if(ObstacleObject.activeInHierarchy)
-        {      
-            // calculate rotation speed
-                     
-            transform.Rotate(Vector3.forward, (rotationSpeed*rotationSpeedBase) * Time.deltaTime);
+        if (!obstacleMesh.activeInHierarchy) return;
+
+        Debug.Log("Hit detected");
+
+        if (other.CompareTag("Player") || other.CompareTag("Bullet"))
+        {
+            obstacleMesh.SetActive(false);
+            explosionEffect.gameObject.SetActive(true);
+            explosionEffect.enabled = true;
+
+            if (obstacleCollider != null)
+            {
+                obstacleCollider.enabled = false;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (obstacleMesh.activeInHierarchy)
+        {
+            transform.Rotate(Vector3.forward, rotationSpeed * rotationSpeedBase * Time.deltaTime);
         }
     }
 }
