@@ -9,6 +9,7 @@ public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string[] lines;
+    public float textSpeed;
     public string nextSceneName;
     public Image fadeImage; // Reference to the UI Image for the fade effect
     public float fadeDuration = 1f; // Duration of the fade effect
@@ -34,6 +35,7 @@ public class Dialogue : MonoBehaviour
             }
             else
             {
+                StopAllCoroutines();
                 textComponent.text = lines[index];
             }
         }
@@ -42,7 +44,16 @@ public class Dialogue : MonoBehaviour
     void StartDialogue()
     {
         index = 0;
-        textComponent.text = lines[index];
+        StartCoroutine(TypeLine());
+    }
+
+    IEnumerator TypeLine()
+    {
+        foreach (char c in lines[index].ToCharArray())
+        {
+            textComponent.text += c;
+            yield return new WaitForSeconds(textSpeed);
+        }
     }
 
     void NextLine()
@@ -50,7 +61,8 @@ public class Dialogue : MonoBehaviour
         if (index < lines.Length - 1)
         {
             index++;
-            textComponent.text = lines[index];
+            textComponent.text = string.Empty;
+            StartCoroutine(TypeLine());
         }
         else
         {
