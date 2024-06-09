@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 {"PlayerName":"","ChapterCompleted":1,"Credits":8350.560546875,"maxSpeed":60.0,"acceleration":20.0,"steering":14.000000953674317,"boostDuration":1.0,"collisionRecovery":1.5,"hasBlaster":true,"blasterLevel":0,"maxShipSpeed":150.0,"maxShipAcceleration":80.0,"maxShipsteering":25.0,"maxShipboostDuration":2.0,"minShipcollisionRecovery":0.25}
+=======
+{"PlayerName":"","ChapterCompleted":1,"Credits":49899.87109375,"maxSpeed":62.0,"acceleration":20.0,"steering":10.0,"boostDuration":1.0,"collisionRecovery":1.5,"hasBlaster":true,"blasterLevel":0,"maxShipSpeed":150.0,"maxShipAcceleration":80.0,"maxShipsteering":25.0,"maxShipboostDuration":2.0,"minShipcollisionRecovery":0.25}
+>>>>>>> Stashed changes
