@@ -9,7 +9,7 @@ public class PlayerPanel : NetworkBehaviour
 {
     public NetworkVariable<bool> isReady = new NetworkVariable<bool>(false,NetworkVariableReadPermission.Everyone,NetworkVariableWritePermission.Owner);
 
-    [SerializeField] private Text isReadyTxt;
+    [SerializeField] private TextMeshProUGUI isReadyTxt;
     [SerializeField] private TextMeshProUGUI readyTxt;
     [SerializeField] private GameObject readyBtn;
 
