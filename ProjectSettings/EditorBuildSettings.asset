@@ -59,4 +59,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game/Chapter1/RaceMulti.unity
     guid: 7895435d9d6759b4fa202251cf669c96
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter2/RaceMulti2.unity
+    guid: 1ee98331a49cba841a073172d921a11a
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter3/RaceMulti3.unity
+    guid: e53160769ff0e6a47a808317b82ee9d7
+  - enabled: 1
+    path: Assets/Scenes/Game/Chapter4/RaceMulti4.unity
+    guid: 04f5573a4043a6545ae5787d10085517
   m_configObjects: {}

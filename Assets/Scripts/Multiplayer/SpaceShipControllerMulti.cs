@@ -46,6 +46,8 @@ public class SpaceShipControllerMulti : NetworkBehaviour
 
     public float BlasterTimer { get => blasterTimer; set => blasterTimer = value; }
 
+    [SerializeField] private GameObject rockBoundary;
+    [SerializeField] private GameObject rockBoundary2;
     private void Start()
     {
         if (!IsOwner)
@@ -208,6 +210,17 @@ public class SpaceShipControllerMulti : NetworkBehaviour
             {
 
             }
+        }
+        if (otherobject.gameObject.CompareTag("Bound"))
+        {
+            rockBoundary.SetActive(false);
+            rockBoundary2.SetActive(true);
+        }
+
+        if (otherobject.gameObject.CompareTag("Bound2"))
+        {
+            rockBoundary.SetActive(true);
+            rockBoundary2.SetActive(false);
         }
     }
 
